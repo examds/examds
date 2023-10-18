@@ -1,4 +1,4 @@
-1. BIO DATA
+1. BIODATA
 
 
 <!DOCTYPE html>
@@ -503,5 +503,504 @@ return true;
 </html>
 
 9. EXPRESS IN ANGULAR
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS Expression</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body bgcolor="cyan">
+    <div ng-app="">
+        <center>
+            <p>My first expression: {{ 10 + 5 }}</p>
+        </center>
+    </div>
+</body>
+
+</html>
+
+10. BACKEND BUILDING
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+        var app = angular.module("myapp", [])
+        app.controller("myctrl", function ($scope) {
+            $scope.s = [
+                {
+                    rollno: "1",
+                    name: "Ushij",
+                    dept: "IT",
+                    address: "Hyderabad"
+                },
+                {
+                    rollno: "2",
+                    name: "Anu",
+                    dept: "ECE",
+                    address: "Chennai"
+                },
+                {
+                    rollno: "3",
+                    name: "Sanjay",
+                    dept: "Mechanical",
+                    address: "Bangalore"
+                },
+                {
+                    rollno: "4",
+                    name: "Abhi",
+                    dept: "ECE",
+                    address: "Mumbai"
+                },
+                {
+                    rollno: "5",
+                    name: "Niraj",
+                    dept: "Civil",
+                    address: "Delhi"
+                }
+            ]
+        })
+    </script>
+</head>
+
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <center>
+            <table border="4">
+                <tr>
+                    <td>Roll No</td>
+                    <td>Name</td>
+                    <td>Department</td>
+                    <td>Address</td>
+                </tr>
+                <tr ng-repeat="student in s">
+                    <td>{{student.rollno}}</td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.dept}}</td>
+                    <td>{{student.address}}</td>
+                </tr>
+            </table>
+        </center>
+    </div>
+</body>
+
+</html>
+
+11. INPUT VALIDATION
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body>
+    <h2>AngularJS Validation Example</h2>
+    <form ng-app="myApp" ng-controller="validateCtrl" name="myForm" novalidate>
+        <p>Username:<br>
+            <input type="text" name="user" ng-model="user" required>
+            <span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+                <span ng-show="myForm.user.$error.required">Username is required.</span>
+            </span>
+        </p>
+        <p>Email:<br>
+            <input type="email" name="email" ng-model="email" required>
+            <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                <span ng-show="myForm.email.$error.required">Email is required.</span>
+                <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+            </span>
+        </p>
+        <p>
+            <input type="submit" ng-disabled="myForm.user.$dirty && myForm.user.$invalid || myForm.email.$dirty && myForm.email.$invalid">
+        </p>
+    </form>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('validateCtrl', function ($scope) {
+            $scope.user = 'Dhivya Dharshini';
+            $scope.email = 'dhivya@gmail.com';
+        });
+    </script>
+</body>
+
+</html>
+
+
+12. MODULES AND CONTROLLERS
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Modules and Controllers in Files</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+        angular.module('DemoApp', []);
+    </script>
+    <script>
+        angular.module('DemoApp').controller('DemoController', ['$scope', function ($scope) {
+            $scope.choice = '';
+            $scope.ch = function (vowel) {
+                $scope.choice = 'You selected: ' + vowel;
+            };
+            $scope.list = ['A', 'E', 'I', 'O', 'U'];
+            $scope.c = function () {
+                $scope.choice = 'You selected: ' + $scope.mychoice;
+            };
+        }]);
+    </script>
+</head>
+
+<body ng-app="DemoApp">
+    <h1 style="color:green">JS</h1>
+    <h3>AngularJS Modules</h3>
+    <h4>Using controllers in Module</h4>
+    <div ng-app="DemoApp" ng-controller="DemoController">
+        Vowels List:
+        <button ng-click="ch('A')">A</button>
+        <button ng-click="ch('E')">E</button>
+        <button ng-click="ch('I')">I</button>
+        <button ng-click="ch('O')">O</button>
+        <button ng-click="ch('U')">U</button>
+        <p>{{ choice }}</p>
+        Vowels List:
+        <select ng-options="option for option in list" ng-model="mychoice" ng-change="c()">
+        </select>
+        <p>{{ choice }}</p>
+    </div>
+</body>
+
+</html>
+
+
+13. CUSTOM DIRECTIVES
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJS ng-model Directive</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        h1 {
+            color: Orange;
+        }
+
+        .column {
+            float: left;
+            text-align: left;
+            width: 49%;
+        }
+
+        .row::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body ng-app="myApp" ng-controller="myController">
+    <h1>Department of Data Science</h1>
+    <h3>ng-model Directive</h3>
+    <h4>Input Box</h4>
+    <div class="row">
+        <div class="column">
+            Name
+            <input type="text" ng-model="name">
+            <pre>{{ name }}</pre>
+            Checkbox
+            <input type="checkbox" ng-model="check">
+            <pre>{{ check }}</pre>
+            Radiobox
+            <input type="radio" ng-model="choice">
+            <pre>{{ choice }}</pre>
+            Number
+            <input type="number" ng-model="num">
+            <pre>{{ num }}</pre>
+            Email
+            <input type="email" ng-model="mail">
+            <pre>{{ mail }}</pre>
+            Url
+            <input type="url" ng-model="url">
+            <pre>{{ url }}</pre>
+        </div>
+        <div class="column">
+            Date:
+            <input type="date" ng-model="date1" (change)="log(date1)">
+            <pre>Todays date: {{ date1 }}</pre>
+            Datetime-local
+            <input type="datetime-local" ng-model="date2">
+            <pre>{{ date2 }}</pre>
+            Time
+            <input type="time" ng-model="time1">
+            <pre>{{ time1 }}</pre>
+            Month
+            <input type="month" ng-model="mon">
+            <pre>{{ mon }}</pre>
+            Week
+            <input type="week" ng-model="we">
+            <pre>{{ we }}</pre>
+        </div>
+    </div>
+    <custom-directive></custom-directive>
+    <script>
+        var app = angular.module('myApp', []);
+        app.directive('customDirective', function () {
+            return {
+                template: '<h3>This is a custom directive</h3>',
+                restrict: 'E'
+            };
+        }); // Restrict usage to elements
+
+        app.controller('myController', function ($scope) {
+            $scope.name = "Hello students!";
+            $scope.check = "";
+            $scope.rad = "";
+            $scope.num = "";
+            $scope.mail = "";
+            $scope.url = "";
+            $scope.date1 = "";
+            $scope.date2 = "";
+            $scope.time1 = "";
+            $scope.mon = "";
+            $scope.we = "";
+            $scope.choice = "";
+
+            $scope.c = function () {
+                $scope.choice = true;
+            };
+        });
+    </script>
+</body>
+</html>
+
+
+14. CRUD OPERATIONS
+
+# Connecting Python to MongoDB Server
+import pymongo
+
+# Connect to the MongoDB server running on localhost at the default port 27017
+client = pymongo.MongoClient("mongodb://localhost:27017/")
+
+# Creating a database named "database"
+db = client["database"]
+
+# Creating a collection named "cities"
+collection = db["cities"]
+
+# Inserting documents into the "cities" collection
+data = [
+    {"Name": "Kolkata", "State": "West Bengal", "Area": "200 kmsq"},
+    {"Name": "Chennai", "State": "Tamil Nadu", "Area": "400 kmsq"},
+    {"Name": "Bengaluru", "State": "Karnataka", "Area": "700 kmsq"},
+    {"Name": "Mumbai", "State": "Maharashtra", "Area": "600 kmsq"}
+]
+
+# Insert one document into the "cities" collection
+collection.insert_one(data[0])
+
+# Insert multiple documents into the "cities" collection
+collection.insert_many(data[1:])
+
+# Reading documents from the "cities" collection
+one = collection.find_one({"Name": "Chennai"})  # Reading one document
+print(one)
+
+all = collection.find()  # Reading all documents
+for document in all:
+    print(document)
+
+# Updating documents in the "cities" collection
+collection.update_one({"Name": "Bengaluru"}, {"$set": {"Area": "750 kmsq"}})
+
+# Deleting a document from the "cities" collection
+collection.delete_one({"State": "Maharashtra"})  # Deleting one document
+
+# Deleting all documents from the "cities" collection
+collection.delete_many({})
+
+# Closing the MongoDB connection
+client.close()
+
+
+15. BANKING APP
+
+app.py:
+
+from flask import Flask, render_template, request, redirect, url_for
+from pymongo import MongoClient
+
+app = Flask(__name__)
+
+# Connect to MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+db = client["banking_system"]
+accounts_collection = db["accounts"]
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/create_account', methods=['GET', 'POST'])
+def create_account():
+    if request.method == 'POST':
+        account_number = request.form['account_number']
+        account_holder = request.form['account_holder']
+        balance = float(request.form['balance'])
+        
+        # Insert account into MongoDB
+        accounts_collection.insert_one({
+            "account_number": account_number,
+            "account_holder": account_holder,
+            "balance": balance
+        })
+        return redirect('/view_accounts')
+    
+    return render_template('create_account.html')
+
+@app.route('/view_accounts')
+def view_accounts():
+    # Retrieve account data from MongoDB
+    accounts = accounts_collection.find()
+    return render_template('view_accounts.html', accounts=accounts)
+
+if __name__ == '__main__':
+    app.run(port=80)
+
+index.html:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Banking Management System</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Welcome to the Banking Management System</h1>
+    <ul>
+        <li><a href="/create_account">Create Account</a></li>
+        <li><a href="/view_accounts">View Accounts</a></li>
+    </ul>
+</body>
+</html>
+
+
+create_account.html:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account</title>
+    <link rel="stylesheet" type="text css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Create a New Account</h1>
+    <form method="POST" action="/create_account">
+        <label for="account_number">Account Number:</label>
+        <input type="text" name="account_number" required><br>
+        <label for="account_holder">Account Holder:</label>
+        <input type="text" name="account_holder" required><br>
+        <label for="balance">Balance:</label>
+        <input type="number" name="balance" required><br>
+        <input type="submit" value="Create Account">
+    </form>
+</body>
+</html>
+
+view_accounts.html:
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Accounts</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>View Accounts</h1>
+    <ul>
+        {% for account in accounts %}
+        <li>{{ account.account_number }} - {{ account.account_holder }} - ₹{{ account.balance }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+
+styles.css:
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin: 10px;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #555;
+}
+
+
+
+
 
 
